@@ -19,7 +19,7 @@ The goal of the project is to arrive at a more precise formulation of frequency 
 2. Set up a virtual environment  
 ```python3 -m venv freq```  
 ```source freq/bin/activate```  
-3. Install packages
+3. Install packages  
    ```pip install -r requirements.txt```  
 4. Set up enviroment variables for crawling reddit (Updated soon)
 
