@@ -12,14 +12,13 @@ The goal of the project is to arrive at a more precise formulation of frequency 
 
 ### Prerequisites
 - Python 3.9.6  
-- Virtual Environment (recommended)
 
 ### Setup
 1. Clone the repo  
 ```git clone https://github.com/illmet/Frequency```  
 2. Set up a virtual environment  
-```python3 -m venv freq  
-   source freq/bin/activate```  
+```python3 -m venv freq```  
+```source freq/bin/activate```  
 3. Install packages
    ```pip install -r requirements.txt```  
 4. Set up enviroment variables for crawling reddit (Updated soon)
