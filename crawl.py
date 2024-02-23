@@ -39,7 +39,8 @@ def scrape_reddit_json(subreddit):
             "id": p.id,
             "title": p.title,
             "content": p.selftext,
-            "comments": []
+            "comments": [],
+            "date": datetime.fromtimestamp(p.created_utc)
         }
         
         p.comments.replace_more(limit=10)
@@ -53,10 +54,11 @@ def scrape_reddit_json(subreddit):
 ###FILE SAVE
 for sub in subs:
     info = scrape_reddit_json(sub)
-    filename = f"{sub}.json"
-    filepath = os.path.join(output_dir, filename)
-    with open(filepath, 'w') as f:
-        json.dump(info, f, indent=4) 
+    print(info)
+    #filename = f"{sub}.json"
+    #filepath = os.path.join(output_dir, filename)
+    #with open(filepath, 'w') as f:
+        #json.dump(info, f, indent=4) 
 
 #refactored txt file writing method (optional, obsolete)
 #def scrape_reddit_txt():
