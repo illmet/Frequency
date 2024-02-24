@@ -10,6 +10,8 @@ import requests
 #CHANGE THESE TO BE UNIX EPOCHS FROM THE START
 campaign_end = int(datetime(2020, 11, 3).timestamp()) #election day
 campaign_start = int(datetime(2020, 8, 18).timestamp()) #biden nomination by dnc
+print(f"End: {campaign_end}")
+print(f"Start: {campaign_start}")
 
 #enviroments for connecting to reddit 
 ci = os.getenv('cireddit')
@@ -35,14 +37,15 @@ comments = []
 ###SCRAPE
 def scrape_reddit_json(subreddit):
     n = 0
-    full = []
-    for p in reddit.subreddit(subreddit).search('"Clinton" OR "Trump"', time_filter="all"):
+    fullposts = []
+    #fullcomms = []
+    for p in reddit.subreddit(subreddit).search('"Biden" OR "Trump"', time_filter="all"):
     #for p in reddit.subreddit(subreddit).new(limit=10):
         time = p.created_utc
         g = int(p.created_utc)
         print(time)
         if campaign_start <= g <= campaign_end:
-            info = {
+            fullposts.append({
                 "id": p.id,
                 "title": p.title,
                 "content": p.selftext,
@@ -51,22 +54,22 @@ def scrape_reddit_json(subreddit):
                 "flair": p.link_flair_text,
                 "subreddit": str(p.subreddit),
                 "date": time
-            }
+            })
             
-            p.comments.replace_more(limit=10)
-            for comment in p.comments.list():
-                info["comments"].append({
-                    "body": comment.body,
-                    "upvotes": comment.score,
-                    "author": str(comment.author) if comment.author else None,
-                    "date": datetime.fromtimestamp(comment.created_utc),
-                    "parent_id": comment.parent_id
-                })
+            #p.comments.replace_more(limit=10)
+            #for comment in p.comments.list():
+                #fullcomms.append({
+                    #"body": comment.body,
+                    #"upvotes": comment.score,
+                    #"author": str(comment.author) if comment.author else None,
+                    #"date": datetime.fromtimestamp(comment.created_utc),
+                    #"parent_id": comment.parent_id
+                #})
             
-            full.append(info)
+            #full.append(info)
             print(f"Post {n} crawled")
             n+=1
-    return full
+    return fullposts
 ###FILE SAVE
 for sub in subs:
     info = scrape_reddit_json(sub)
