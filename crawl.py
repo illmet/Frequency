@@ -17,7 +17,7 @@ ci = os.getenv('cireddit')
 cs = os.getenv('csreddit')
 ua = os.getenv('uareddit')
 #subsets of subreddits
-subs = ["Politics", "uspolitics"]
+subs = ["Politics", "uspolitics", "Conservative", "Liberal", "trump", "joebiden", "Libertarian", "DemocraticSocialism"]
 #for the enviroment variables
 reddit = praw.Reddit(
     client_id=ci,
@@ -58,7 +58,7 @@ def scrape_reddit_json(subreddit):
                     "body": comment.body,
                     "upvotes": comment.score,
                     "author": str(comment.author) if comment.author else None,
-                    "date": datetime.fromtimestamp(comment.created_utc),
+                    "date": datetime.fromtimestamp(comment.created_utc).isoformat(),
                     "post_id": p.id,
                     "parent_id": comment.parent_id
                 })
@@ -70,7 +70,7 @@ def scrape_reddit_json(subreddit):
     
 ###FILE SAVE
 for sub in subs:
-    posts, comments = scrape_reddit_json(sub)
+    posts, comms = scrape_reddit_json(sub)
     #print(info)
     #save posts
     pathpost = os.path.join(postsdir, f"{sub}_posts.json")
