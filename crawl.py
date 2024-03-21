@@ -34,13 +34,13 @@ commsdir = os.path.join(output, "comments")
 def scrape_reddit_json(subreddit):
     n = 0
     fullposts = []
-    fullcomms = []
+    #fullcomms = []
     #the search string is annoying, I haven't figured out the way to do joins properly...
     #for now, only gets the mention of either Biden or Trump in the specified period
     for p in reddit.subreddit(subreddit).search('Trump', time_filter="all"):
         time = int(p.created_utc)
         #print(time)
-        if campaign_start <= time <= campaign_end:
+        if campaign_start <= time <= campaign_end & p.selftext != "":
             fullposts.append({
                 "id": p.id,
                 "title": p.title,
@@ -52,34 +52,34 @@ def scrape_reddit_json(subreddit):
                 "date": time
             })
             
-            p.comments.replace_more(limit=10)
-            for comment in p.comments.list():
-                fullcomms.append({
-                    "body": comment.body,
-                    "upvotes": comment.score,
-                    "author": str(comment.author) if comment.author else None,
-                    "date": datetime.fromtimestamp(comment.created_utc).isoformat(),
-                    "post_id": p.id,
-                    "parent_id": comment.parent_id
-                })
+            #p.comments.replace_more(limit=10)
+            #for comment in p.comments.list():
+                #fullcomms.append({
+                    #"body": comment.body,
+                    #"upvotes": comment.score,
+                    #"author": str(comment.author) if comment.author else None,
+                    #"date": datetime.fromtimestamp(comment.created_utc).isoformat(),
+                    #"post_id": p.id,
+                    #"parent_id": comment.parent_id
+                #})
             
             #full.append(info)
             print(f"Post {n} crawled")
             n+=1
-    return fullposts, fullcomms
+    return fullposts #add comments in case you want comments
     
 ###FILE SAVE
 for sub in subs:
-    posts, comms = scrape_reddit_json(sub)
+    posts = scrape_reddit_json(sub) #add comms in case you want comments
     #print(info)
     #save posts
     pathpost = os.path.join(postsdir, f"{sub}_posts.json")
     with open(pathpost, 'w') as f:
         json.dump(posts, f, indent=4) 
-    #save comment
-    pathcomm = os.path.join(commsdir, f"{sub}_comments.json")
-    with open(pathcomm, 'w') as f:
-        json.dump(comms, f, indent=4)
+    #save comments
+    #pathcomm = os.path.join(commsdir, f"{sub}_comments.json")
+    #with open(pathcomm, 'w') as f:
+        #json.dump(comms, f, indent=4)
     
 
 #refactored txt file writing method (optional, obsolete), do not uncomment, do not delete! thanks.
