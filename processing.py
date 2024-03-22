@@ -50,7 +50,7 @@ def process_data(folder, id):
         t[i] = v5
         words+=len(v5.split())
     #some of the descrpritive statistics if needed
-    print(t[:10])
+    print("Parsing of documents complete.")
     print(f"Total documents: {len(t)}")
     print(f"Total words: {words}")
     return t
