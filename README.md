@@ -6,7 +6,7 @@ The goal of the project is to arrive at a more precise formulation of frequency 
 ## TODO:
 - [x] Implement basic crawling
 - [x] Improve to include custom timeframes, search string criteria
-- [ ] Expand on the search to include more posts
+- [x] Expand on the search to include more posts
 - [x] Create the initial preprocessing procedure
 - [ ] Add comments (optional)
 
@@ -28,9 +28,5 @@ The goal of the project is to arrive at a more precise formulation of frequency 
 ### Usage (READ THIS FIRST)
 The current procedure is starting with crawling the raw data from reddit, that is done here:  
 ```python3 crawl.py```  
-The output is saved in the data folder, in .json files for each subreddit. (Only posts and subreddits don't need to be distributed like they are now). 
-The preprocessing.py file turns the text into a readable version.
-Then, currently the sentiment analysis is only applied to this preprocessed text. To apply the visualisation, run the following:
-```python3 sentiment.py```
-Which for now just runs the visualisation and doesn't return anything.
- 
+This will save the required posts and comments corpora in respective folders.  
+The preprocessing.py file turns the text into a readable version.   
