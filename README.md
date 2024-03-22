@@ -6,8 +6,8 @@ The goal of the project is to arrive at a more precise formulation of frequency 
 ## TODO:
 - [x] Implement basic crawling
 - [x] Improve to include custom timeframes, search string criteria
-- [ ] Include the sleep and checking for appropriate posts 
-- [ ] Create the full preprocessing procedure
+- [ ] Expand on the search to include more posts
+- [x] Create the initial preprocessing procedure
 - [ ] Add comments (optional)
 
 ## Installation
