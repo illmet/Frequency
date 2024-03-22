@@ -25,7 +25,12 @@ The goal of the project is to arrive at a more precise formulation of frequency 
    ```pip install -r requirements.txt```  
 4. Set up enviroment variables for crawling reddit (Updated soon)
 
-### Usage
-Run the script like so:  
+### Usage (READ THIS FIRST)
+The current procedure is starting with crawling the raw data from reddit, that is done here:  
 ```python3 crawl.py```  
-The output is saved in the data folder, in .json files for each subreddit.  
+The output is saved in the data folder, in .json files for each subreddit. (Only posts and subreddits don't need to be distributed like they are now). 
+The preprocessing.py file turns the text into a readable version.
+Then, currently the sentiment analysis is only applied to this preprocessed text. To apply the visualisation, run the following:
+```python3 sentiment.py```
+Which for now just runs the visualisation and doesn't return anything.
+ 
