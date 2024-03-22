@@ -4,6 +4,7 @@ from praw.models import MoreComments
 from datetime import datetime, timedelta
 import json
 import requests
+import time
 
 ###CONFIG
 #the time period for the scraping
@@ -35,12 +36,11 @@ def scrape_reddit_json(subreddit):
     n = 0
     fullposts = []
     #fullcomms = []
-    #the search string is annoying, I haven't figured out the way to do joins properly...
-    #for now, only gets the mention of either Biden or Trump in the specified period
-    for p in reddit.subreddit(subreddit).search('Trump', time_filter="all"):
-        time = int(p.created_utc)
-        #print(time)
-        if campaign_start <= time <= campaign_end & p.selftext != "":
+    #for now, only gets the mention of either Biden or Trump in the specified period (or any other single word)
+    for p in reddit.subreddit(subreddit).search('Election Biden Trump', sort='top', syntax='lucene', time_filter='all', limit=100):
+        post_time = int(p.created_utc)
+        #print(post_time)
+        if (campaign_start <= post_time <= campaign_end) and (p.selftext != "") and (p.selftext != "[removed]") and (p.selftext != "[deleted]") and (len(p.selftext) < 4999):
             fullposts.append({
                 "id": p.id,
                 "title": p.title,
@@ -49,7 +49,7 @@ def scrape_reddit_json(subreddit):
                 "author": str(p.author) if p.author else None,
                 "flair": p.link_flair_text,
                 "subreddit": str(p.subreddit),
-                "date": time
+                "date": post_time
             })
             
             #p.comments.replace_more(limit=10)
@@ -66,6 +66,7 @@ def scrape_reddit_json(subreddit):
             #full.append(info)
             print(f"Post {n} crawled")
             n+=1
+            time.sleep(0.01)
     return fullposts #add comments in case you want comments
     
 ###FILE SAVE
