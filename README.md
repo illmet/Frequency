@@ -26,7 +26,7 @@ The goal of the project is to arrive at a more precise formulation of frequency 
 4. Set up enviroment variables for crawling reddit (Updated soon)
 
 ### Usage (READ THIS FIRST)
-The current procedure is starting with crawling the raw data from reddit, that is done here:  
-```python3 crawl.py```  
-This will save the required posts and comments corpora in respective folders.  
-The preprocessing.py file turns the text into a readable version.   
+Crawling won't work because of the environemnt variables...  
+To use the main script just use:
+```python3 main.py```  
+which would do all the processing and analysis in one go.
