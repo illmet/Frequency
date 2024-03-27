@@ -1,3 +1,7 @@
+from matplotlib import pyplot as plt
+from nltk import FreqDist
+
+from frequency_calculation import calculate_frequency_distribution
 from processing import process_data
 import data
 import nltk
@@ -39,3 +43,7 @@ text = get_data()
 
 nltk_data = remove_stopwords_nltk(text)
 spacy_data = remove_stopwords_spacy(text)
+
+calculate_frequency_distribution(text, "vanilla")
+calculate_frequency_distribution(nltk_data, "nltk")
+calculate_frequency_distribution(spacy_data, "spacy")
