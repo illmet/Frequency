@@ -7,3 +7,9 @@ requests==2.31.0
 update-checker==0.18.0
 urllib3==2.2.1
 websocket-client==1.7.0
+nltk~=3.8.1
+spacy~=3.7.2
+gensim~=4.3.0
+matplotlib~=3.8.3
+wordcloud~=1.9.3
+transformers~=4.39.1
