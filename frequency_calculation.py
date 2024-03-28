@@ -61,7 +61,7 @@ def calculate_frequency_distribution(text, output_name):
     sorted_items = sorted(items, key=lambda item: item[1], reverse=True)
 
     # Save the sorted frequency distribution to a file
-    with open(f"outputs/text/frequency_distribution_{output_name}.txt", "w") as file:
+    with open(f"outputs/frequency_distribution/frequency_distribution_{output_name}.txt", "w") as file:
         for word, freq in sorted_items:
             file.write(f'{word}: {freq}\n')
 
