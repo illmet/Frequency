@@ -38,7 +38,7 @@ def calculate_frequency_distribution(text, output_name):
     plt.xlabel('Rank')
     plt.ylabel('Frequency')
     plt.legend()
-    plt.savefig(f"outputs/frequency_distribution_normal_{output_name}.png")
+    plt.savefig(f"outputs/plots/frequency_distribution_normal_{output_name}.png")
 
     # Now plot the actual frequency distribution against Zipf's law in log scale
     plt.figure(figsize=(10, 6))
@@ -52,12 +52,18 @@ def calculate_frequency_distribution(text, output_name):
     plt.xlabel('Rank')
     plt.ylabel('Frequency')
     plt.legend()
-    plt.savefig(f"outputs/frequency_distribution_log_{output_name}.png")
+    plt.savefig(f"outputs/plots/frequency_distribution_log_{output_name}.png")
 
-    # Save the frequency distribution to a file
-    with open(f"outputs/frequency_distribution_{output_name}.txt", "w") as file:
-        for rank, freq in zip(ranks, frequencies):
-            file.write(f'Rank: {rank}, Frequency: {freq}\n')
+    # Convert the items of the frequency distribution to a list of tuples
+    items = list(frequency_distribution.items())
+
+    # Sort the list of tuples in descending order by the second element of each tuple
+    sorted_items = sorted(items, key=lambda item: item[1], reverse=True)
+
+    # Save the sorted frequency distribution to a file
+    with open(f"outputs/text/frequency_distribution_{output_name}.txt", "w") as file:
+        for word, freq in sorted_items:
+            file.write(f'{word}: {freq}\n')
 
 
 
