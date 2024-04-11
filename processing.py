@@ -44,7 +44,7 @@ def process_data(folder, id):
     for i in range(len(t)):
         v1 = re.sub(r'http\S+', '', t[i], flags=re.MULTILINE)
         v2 = re.sub(r'(?:r|u|n)/\S+', '', v1) 
-        v3 = re.sub(r'[^a-zA-Z0-9\s]', '', v2) #remove special characters
+        v3 = re.sub(r'[^a-zA-Z0-9\s.,\']', '', v2)
         v4 = re.sub(r'\s+', ' ', v3).strip()
         v5 = remove_emoji(v4)
         t[i] = v5
