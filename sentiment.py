@@ -4,10 +4,6 @@ from wordcloud import WordCloud
 from collections import defaultdict
 from processing import process_data
 
-#get the data from the function
-posts = process_data("data/posts", "content")
-comms = process_data("data/comments", "body")
-
 #set up the pipeline for sentiment analysis
 classifier = pipeline("text-classification", model="distilbert-base-uncased-finetuned-sst-2-english")
 
@@ -23,8 +19,10 @@ def sentiment_analysis(text):
             aggregated.append(-output[0]['score'])
         print(f"Post {i+1}, sentiment: {output[0]['label']}, score: {output[0]['score']:.5f}")
     return aggregated
-g = sentiment_analysis(posts)
-print(sum(g)/len(g))
+
+#for debugging
+#g = sentiment_analysis(posts)
+#print(sum(g)/len(g))
 
 #visualisation for the sentiment analysis
 def visualise_sentiments(text):
