@@ -5,6 +5,7 @@ from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from nltk.corpus import stopwords
 import nltk
+import json
 
 nltk.download('punkt')
 
@@ -71,6 +72,10 @@ def calculate_frequency_distribution(text, output_name):
     with open(f"outputs/frequency_distribution/frequency_distribution_{output_name}.txt", "w") as file:
         for word, freq in sorted_items:
             file.write(f'{word}: {freq}\n')
+
+    # export a json file
+    with open(f"outputs/frequency_distribution/frequency_distribution_{output_name}.json", "w") as file:
+        json.dump(frequency_distribution, file, indent=1)
 
 
 
